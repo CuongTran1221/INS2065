@@ -1,0 +1,38 @@
+# README
+
+## GROUP <Group 4>
+
+- Member 1: Nguyễn Thảo Vi 
+- Member 2: Trần Văn Cường
+- Member 3: Nguyễn Đức Huy 
+- Member 4: Hoàng Trang My
+
+## Starting server
+
+- Run on your terminal `docker-compose up`
+- Open browser at http://localhost:3000/
+- Continue your work on a new terminal tab. Leave this terminal tab open until you want to stop the server.
+
+## Stop server
+
+`CTRL + C`
+
+### Accessing docker container
+**Remember to run this before any of the command below**
+
+`docker exec -it ins20065-proj_app_1 /bin/bash`
+
+### Bundle install
+Installing required libraries, you can run this command multiple time. If there is an error, let make sure this command has been executed successfully.
+
+`bundle install`
+
+### Migrate database
+
+`rails db:migrate`
+
+## Optional
+
+### Rails console
+
+`rails c`

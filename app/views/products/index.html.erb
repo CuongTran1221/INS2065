@@ -1,0 +1,63 @@
+
+
+
+<div class="container mx-auto px-4">
+  <div class="flex items-center justify-between flex-wrap mb-6">
+    <h1 class="text-3xl font-bold">Products</h1>
+
+    <%= link_to new_product_path, class: "bg-black text-white px-4 py-2 rounded" do %>
+    Add New Product
+    <% end %>
+  </div>
+<div class="flex bg-white">
+  <div class="w-2/6 pr-4 bg-white">
+  <%= search_form_for @q, html: { class: 'mb-4' } do |f| %>
+    <div class="mb-4">
+      <%= f.label :name, class: 'block mb-2 text-sm font-semibold text-gray-700 rounded' %>
+      <%= f.text_field :name_cont, class: 'form-input w-full' %>
+    </div>
+  
+    <div class="mb-4">
+      <%= f.label :brand_id, class: 'block mb-2 text-sm font-semibold text-gray-700 rounded' %>
+      <%= f.collection_select(:brand_id, Brand.all, :id, :name, { include_blank: true }, { class: "form-select w-full" }) %>
+    </div>
+  
+    <div class="mb-4 flex justify-between">
+      <div class="w-1/2 pr-2">
+        <%= f.label :price, "Price", class: 'block mb-2 text-sm font-semibold text-gray-700 rounded' %>
+        <%= f.text_field :price_gteq, class: 'form-input w-full' %>
+      </div>
+      <div class="w-1/2 pl-2">
+        <%= f.label :price, "To", class: 'block mb-2 text-sm font-semibold text-gray-700 rounded' %>
+        <%= f.text_field :price_lteq, class: 'form-input w-full' %>
+      </div>
+    </div>
+  
+    <div class="mb-4 flex items-center">
+      <%= f.check_box :available_true, include_hidden: false, class: 'form-checkbox' %>
+      <%= f.label :available, 'Available?', class: 'ml-2 text-gray-700' %>
+    </div>
+  
+    <%= f.submit "Search", class: 'bg-black text-white px-4 py-2 rounded' %>
+    <%= link_to "Clear", request.path, class: "bg-black text-white px-4 py-2 rounded" %>
+  <% end %>
+</div>
+  
+  
+<div class="w-4/6 pl-4 bg-white">
+  <div class="grid grid-cols-3 gap-4">
+  <% @products.each do |product| %>
+    <div class="border border-slate-300 dark:border-slate-600 p-4 text-center flex flex-col">
+      <%= image_tag product.image_url, class: "w-full h-48 object-contain mb-4" %>
+      <h4 class="text-lg font-semibold mb-2"><%= product.name %></h4>
+      <div class="flex-grow"></div>
+      <p class="text-gray-600 mb-2">$ <%= sprintf('%.2f', product.price * (1 - product.discount)) %></p>
+      <a href="<%= product_path(product) %>" class="bg-black text-white px-4 py-2 rounded-full">View Details</a>
+    </div>
+  <% end %>
+</div>
+
+</div>
+</div>
+</div>
+</div>
